@@ -57,6 +57,8 @@ include('includes/menu.php');
                 // count rows to check whether we have data in database or not
                 $count = mysqli_num_rows($result);
 
+                // create variable for incrementing s/n 
+                $sn = 1;
 
                 // check the num of rows
                 if ($count > 0) {
@@ -72,7 +74,7 @@ include('includes/menu.php');
             ?>
 
                         <tr>
-                            <td><?php echo $id; ?></td>
+                            <td><?php echo $sn++; ?></td>
                             <td><?php echo $full_name; ?></td>
                             <td><?php echo $username; ?></td>
                             <td>

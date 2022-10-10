@@ -120,6 +120,14 @@ table tr td{
     background-color: #e03131;
 }
 
+.success-message{
+    color: #2f9e44;
+}
+
+.error-message{
+    color: #e03131;
+}
+
 
 /* ----- Footer ----- */
 .footer{
