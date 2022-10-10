@@ -4,6 +4,19 @@
 <div class="main">
     <div class="wrapper">
         <h1>Add Admin</h1>
+
+        <!-- session message starts -->
+        <?php
+        // checking whether the session is set or not
+        if (isset($_SESSION['add'])) {
+            // display the message
+            echo $_SESSION['add'];
+            // removing the message
+            unset($_SESSION['add']);
+        }
+        ?>
+        <!-- session message ends -->
+
         <br><br>
         <form action="" method="POST">
             <table class="table-add-admin">
@@ -55,9 +68,17 @@ if (isset($_POST['submit'])) {
 
     // check whether the query is executed or not
     if ($result == TRUE) {
-        echo "Data is inserted successful";
+        // echo "Data is inserted successful";
+        // create a session variable to display message
+        $_SESSION['add'] = "Admin Added Successfully";
+        // redirect page to Manage Admin
+        header("Location: " . SITEURL . 'admin/manage-admin.php');
     } else {
-        echo "Failed to insert data";
+        // echo "Failed to insert data";
+        // create a session variable to display message
+        $_SESSION['add'] = "Failed to Add Admin";
+        // redirect page to Add Admin
+        header("Location: " . SITEURL . 'admin/add-admin.php');
     }
 }
 ?>

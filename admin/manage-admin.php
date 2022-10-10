@@ -8,6 +8,19 @@ include('includes/menu.php');
 <div class="main">
     <div class="wrapper">
         <h1>Manage Admin</h1>
+        <br>
+        <!-- session message starts -->
+        <?php
+        // checking whether the session is set or not
+        if (isset($_SESSION['add'])) {
+            // display session message
+            echo $_SESSION['add'];
+            // removing session message
+            unset($_SESSION['add']);
+        }
+        ?>
+        <br>
+        <!-- session message ends -->
 
         <!-- button Starts-->
         <br>
