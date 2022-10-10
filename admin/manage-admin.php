@@ -38,33 +38,51 @@ include('includes/menu.php');
                 <th>Username</th>
                 <th>Actions</th>
             </tr>
-            <tr>
-                <td>1.</td>
-                <td>Julius Mboto</td>
-                <td>mboto</td>
-                <td>
-                    <a href="" class="btn-secondary">Update</a>
-                    <a href="" class="btn-danger">Delete</a>
-                </td>
-            </tr>
-            <tr>
-                <td>2.</td>
-                <td>Julius Mboto</td>
-                <td>mboto</td>
-                <td>
-                    <a href="" class="btn-secondary">Update</a>
-                    <a href="" class="btn-danger">Delete</a>
-                </td>
-            </tr>
-            <tr>
-                <td>3.</td>
-                <td>Julius Mboto</td>
-                <td>mboto</td>
-                <td>
-                    <a href="" class="btn-secondary">Update</a>
-                    <a href="" class="btn-danger">Delete</a>
-                </td>
-            </tr>
+
+            <!-- displaying users from database -->
+
+            <?php
+            // query to get all admin from database
+            $query = "SELECT * FROM users";
+            // execute the query
+            $result = mysqli_query($connection, $query);
+            // check whether the query is executed or not
+            if ($result == TRUE) {
+                // count rows to check whether we have data in database or not
+                $count = mysqli_num_rows($result);
+
+
+                // check the num of rows
+                if ($count > 0) {
+                    // we have data in database
+                    while ($rows = mysqli_fetch_assoc($result)) {
+                        // while loop to get the data from databases | will run as long as we have data in database
+                        // get individual data
+                        $id = $rows['id'];
+                        $full_name = $rows['full_name'];
+                        $username = $rows['username'];
+
+                        // display the values our table
+            ?>
+
+                        <tr>
+                            <td><?php echo $id; ?></td>
+                            <td><?php echo $full_name; ?></td>
+                            <td><?php echo $username; ?></td>
+                            <td>
+                                <a href="" class="btn-secondary">Update</a>
+                                <a href="" class="btn-danger">Delete</a>
+                            </td>
+                        </tr>
+
+            <?php
+                    }
+                } else {
+                    // we dont have data in database
+                }
+            }
+            ?>
+
         </table>
         <!-- table Ends -->
     </div>
