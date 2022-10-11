@@ -24,6 +24,11 @@
             unset($_SESSION['login']);
         }
 
+        if (isset($_SESSION['no-login-message'])) {
+            echo $_SESSION['no-login-message'];
+            unset($_SESSION['no-login-message']);
+        }
+
         ?>
 
         <br>
@@ -71,6 +76,8 @@ if (isset($_POST['submit'])) {
     if ($count == 1) {
         // user available and login success message
         $_SESSION['login'] = "<div class='success-message'>Login Successful</div>";
+        // for authorization (access control) | check whether the user is logged or not and logout will unset it
+        $_SESSION['user'] = $username;
         // redirect to home page/dashboard
         header('Location:' . SITEURL . 'admin/');
     } else {
