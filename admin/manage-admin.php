@@ -9,6 +9,7 @@ include('includes/menu.php');
     <div class="wrapper">
         <h1>Manage Admin</h1>
         <br>
+
         <!-- session message starts -->
         <?php
         // checking whether the session is set or not
@@ -29,6 +30,20 @@ include('includes/menu.php');
             unset($_SESSION['update']);
         }
 
+        if (isset($_SESSION['user-not-found'])) {
+            echo $_SESSION['user-not-found'];
+            unset($_SESSION['user-not-found']);
+        }
+
+        if (isset($_SESSION['password-not-match'])) {
+            echo $_SESSION['password-not-match'];
+            unset($_SESSION['password-not-match']);
+        }
+
+        if (isset($_SESSION['password-changed'])) {
+            echo $_SESSION['password-changed'];
+            unset($_SESSION['password-changed']);
+        }
 
         ?>
         <br>
@@ -86,6 +101,7 @@ include('includes/menu.php');
                             <td>
                                 <a href="<?php echo SITEURL; ?>admin/update-admin.php?id=<?php echo $id; ?>" class="btn-secondary">Update</a>
                                 <a href="<?php echo SITEURL; ?>admin/delete-admin.php?id=<?php echo $id; ?>" class="btn-danger">Delete</a>
+                                <a href="<?php echo SITEURL; ?>admin/change.password.php?id=<?php echo $id; ?>" class="btn-primary">Change Password</a>
                             </td>
                         </tr>
 
