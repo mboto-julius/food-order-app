@@ -8,10 +8,23 @@ include('includes/menu.php');
 <div class="main">
     <div class="wrapper">
         <h1>Manage Category</h1>
+        <br><br>
+
+        <!-- session message starts -->
+        <?php
+
+        // checking whether the session is set or not
+        if (isset($_SESSION['add-category'])) {
+            echo $_SESSION['add-category'];
+            unset($_SESSION['add-category']);
+        }
+
+        ?>
+        <!-- session message ends -->
+
         <!-- button Starts-->
         <br>
-        <br>
-        <a href="" class="btn-primary">Add Category</a>
+        <a href="<?php echo SITEURL; ?>admin/add-category.php" class="btn-primary">Add Category</a>
         <br>
         <br>
         <!-- button Ends -->
