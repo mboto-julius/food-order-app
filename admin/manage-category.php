@@ -33,37 +33,81 @@ include('includes/menu.php');
         <table class="table-width">
             <tr>
                 <th>S/N</th>
-                <th>Full Name</th>
-                <th>Username</th>
+                <th>Title</th>
+                <th>Image</th>
+                <th>Featured</th>
+                <th>Active</th>
                 <th>Actions</th>
             </tr>
-            <tr>
-                <td>1.</td>
-                <td>Julius Mboto</td>
-                <td>mboto</td>
-                <td>
-                    <a href="" class="btn-secondary">Update</a>
-                    <a href="" class="btn-danger">Delete</a>
-                </td>
-            </tr>
-            <tr>
-                <td>2.</td>
-                <td>Julius Mboto</td>
-                <td>mboto</td>
-                <td>
-                    <a href="" class="btn-secondary">Update</a>
-                    <a href="" class="btn-danger">Delete</a>
-                </td>
-            </tr>
-            <tr>
-                <td>3.</td>
-                <td>Julius Mboto</td>
-                <td>mboto</td>
-                <td>
-                    <a href="" class="btn-secondary">Update</a>
-                    <a href="" class="btn-danger">Delete</a>
-                </td>
-            </tr>
+
+            <?php
+
+            // query to get all  categories from database
+            $query = "SELECT * FROM categories";
+            // ecxecute query
+            $result = mysqli_query($connection, $query);
+            // counts rows
+            $count = mysqli_num_rows($result);
+            // create a serial number variable
+            $sn = 1;
+            // check whether we have data in database or not
+            if ($count > 0) {
+                // we have data in database
+                // get the data and display (while loop will continue as long as we have database   )
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $id = $row['id'];
+                    $title = $row['title'];
+                    $image_name = $row['image_name'];
+                    $featured = $row['featured'];
+                    $active = $row['active'];
+
+            ?>
+
+                    <tr>
+                        <td><?php echo $sn++; ?></td>
+                        <td><?php echo $title; ?></td>
+
+                        <td>
+                            <?php
+                            // echo $image_name; 
+                            if ($image_name != "") {
+                                // display the image
+                            ?>
+                                <img src="<?php echo SITEURL; ?>images/category/<?php echo $image_name; ?>" width="200px">
+                            <?php
+                            } else {
+                                // display the message
+                                echo "<div class='error-message'>Image not added</div>";
+                            }
+                            ?>
+                        </td>
+
+                        <td><?php echo $featured; ?></td>
+                        <td><?php echo $active; ?></td>
+                        <td>
+                            <a href="" class="btn-secondary">Update</a>
+                            <a href="" class="btn-danger">Delete</a>
+                        </td>
+                    </tr>
+
+
+                <?php
+                }
+            } else {
+                // we do not have data
+                // we will display the message inside table
+                ?>
+
+                <tr>
+                    <td colspan="6">
+                        <div class="error-message">No category Added.</div>
+                    </td>
+                </tr>
+
+            <?php
+            }
+
+            ?>
         </table>
         <!-- table Ends -->
     </div>
