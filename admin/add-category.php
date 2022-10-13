@@ -96,7 +96,16 @@
                 // upload the image
                 // to upload image we need image name, source path and destination path
                 $image_name = $_FILES['image']['name'];
+
+                // Auto rename our image
+                // get the extension of our image (jpg, png, gif, etc) "food1.jpg"
+                $extension = end(explode('.', $image_name));
+
+                // rename the image
+                $image_name = "food_category_" . rand(000, 999) . '.' . $extension;
+
                 $source_path = $_FILES['image']['tmp_name'];
+
                 $destination_path = '/var/www/foodapp/images/category/' . $image_name;
 
                 // finally upload the image
