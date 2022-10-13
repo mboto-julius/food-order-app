@@ -16,16 +16,28 @@
             unset($_SESSION['add-category']);
         }
 
+        if (isset($_SESSION['upload'])) {
+            echo $_SESSION['upload'];
+            unset($_SESSION['upload']);
+        }
+
         ?>
         <!-- session message ends -->
 
         <br>
         <!-- Add Category Form Starts -->
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
             <table class="table-add-admin">
                 <tr>
                     <td>Title: </td>
                     <td><input type="text" name="title" placeholder="Categoty Title"></td>
+                </tr>
+                <tr>
+                    <td>Select Image: </td>
+                    <td>
+                        <input type="file" name="image">
+                        <!-- add multipart/form-data for upload to form tag -->
+                    </td>
                 </tr>
                 <tr>
                     <td>Featured: </td>
@@ -75,9 +87,40 @@
                 $active = "No";
             }
 
+            // check whether the image is selected or not and set the value for image name accordingly
+            // print_r($_FILES['image']);
+            // the break the code
+            //die();
+            //  Array ( [name] => pizza.jpeg [full_path] => pizza.jpeg [type] => image/jpeg [tmp_name] => /tmp/phpW5hlKn [error] => 0 [size] => 660158 ) 
+            if (isset($_FILES['image']['name'])) {
+                // upload the image
+                // to upload image we need image name, source path and destination path
+                $image_name = $_FILES['image']['name'];
+                $source_path = $_FILES['image']['tmp_name'];
+                $destination_path = '/var/www/foodapp/images/category/' . $image_name;
+
+                // finally upload the image
+                $upload = move_uploaded_file($source_path, $destination_path);
+
+                // check whether the image is uploaded or not
+                // and if the image is not uploaded the we will stop the process and redirect with error message
+                if ($upload == false) {
+                    // set message
+                    $_SESSION['upload'] = "<div class='error-message'>Failed to upload the Image.</div>";
+                    // redirect to add category page
+                    header('Location:' . SITEURL . 'admin/add-category.php');
+                    // stop the process
+                    die();
+                }
+            } else {
+                // dont upload image and set the image name value as blank
+                $image_name = "";
+            }
+
             // 2. create sql query to insert category into database
             $query = "INSERT INTO categories SET
                     title = '$title',
+                    image_name = '$image_name',
                     featured = '$featured',
                     active = '$active'
             ";
@@ -86,7 +129,7 @@
             $result = mysqli_query($connection, $query);
 
             // 4. Check whether the query executed or not and data is added or not
-            if ($result ==  TRUE) {
+            if ($result == true) {
                 // Query executed and Category added
                 $_SESSION['add-category'] = "<div class='success-message'>Category Added Successfully</div>";
                 // redirect to manage category Page
