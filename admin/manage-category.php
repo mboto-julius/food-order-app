@@ -19,6 +19,17 @@ include('includes/menu.php');
             unset($_SESSION['add-category']);
         }
 
+        if (isset($_SESSION['remove-category'])) {
+            echo $_SESSION['remove-category'];
+            unset($_SESSION['remove-category']);
+        }
+
+        if (isset($_SESSION['delete-category'])) {
+            echo $_SESSION['delete-category'];
+            unset($_SESSION['delete-category']);
+        }
+
+
         ?>
         <!-- session message ends -->
 
@@ -86,7 +97,7 @@ include('includes/menu.php');
                         <td><?php echo $active; ?></td>
                         <td>
                             <a href="" class="btn-secondary">Update</a>
-                            <a href="" class="btn-danger">Delete</a>
+                            <a href="<?php echo SITEURL; ?>admin/delete-category.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>" class="btn-danger">Delete</a>
                         </td>
                     </tr>
 
