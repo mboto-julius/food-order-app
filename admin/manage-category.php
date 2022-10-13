@@ -29,6 +29,12 @@ include('includes/menu.php');
             unset($_SESSION['delete-category']);
         }
 
+        if (isset($_SESSION['no-category-found'])) {
+            echo $_SESSION['no-category-found'];
+            unset($_SESSION['no-category-found']);
+        }
+
+
 
         ?>
         <!-- session message ends -->
@@ -96,7 +102,7 @@ include('includes/menu.php');
                         <td><?php echo $featured; ?></td>
                         <td><?php echo $active; ?></td>
                         <td>
-                            <a href="<?php echo SITEURL; ?>admin/update-category.php" class="btn-secondary">Update</a>
+                            <a href="<?php echo SITEURL; ?>admin/update-category.php?id=<?php echo $id; ?>" class="btn-secondary">Update</a>
                             <a href="<?php echo SITEURL; ?>admin/delete-category.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>" class="btn-danger">Delete</a>
                         </td>
                     </tr>
