@@ -6,6 +6,17 @@
         <h1>Add Food</h1>
 
         <br><br>
+
+        <?php
+
+        if (isset($_SESSION['upload-food'])) {
+            echo $_SESSION['upload-food'];
+            unset($_SESSION['upload-food']);
+        }
+
+
+        ?>
+
         <!-- Add Food Form Starts -->
         <form action="" method="POST" enctype="multipart/form-data">
             <table class="table-add-admin">
@@ -93,6 +104,109 @@
             </table>
         </form>
         <!-- Add Food Form Ends -->
+
+
+        <?php
+        // check whether the button is clicked or not
+        if (isset($_POST['submit'])) {
+            // add food to the database
+            // 1. Get the Data from form
+            $title = $_POST['title'];
+            $description = $_POST['description'];
+            $price = $_POST['price'];
+            $category = $_POST['category'];
+
+            // check whether the radio button for featured and active are chacked or not
+            if (isset($_POST['featured'])) {
+                // if selected get the value from form
+                $featured = $_POST['featured'];
+            } else {
+                // if not selected, set the default value
+                $featured = "No";
+            }
+
+            if (isset($_POST['active'])) {
+                // if selected get the value from form
+                $active = $_POST['active'];
+            } else {
+                // if not selected, set the default value
+                $active = "No";
+            }
+
+            // 2. Upload the image if selected
+            // checked whether selected image is clicked or not and upload the image only if the image is selected
+            if (isset($_FILES['image']['name'])) {
+
+                // get the details of the selected image
+                $image_name = $_FILES['image']['name'];
+
+                // check whether the image is selected or not and upload image only if selected
+                if ($image_name != "") {
+                    // this means image is selected
+                    // A. rename the image
+                    // get the extension of selected image (jpg, png, gif etc) 
+                    $extension = end(explode(".", $image_name));
+
+                    // create new name for image (name will be like Food-Name-666.jpg)
+                    $image_name = "Food-Name-" . rand(0000, 9999) . "." . $extension;
+
+                    // B. upload the image
+                    // get the source path and destionation path
+                    // source path is the current location of the image
+                    $srcPath = $_FILES['image']['tmp_name'];
+
+                    // destination path for the image to be uploaded    
+                    $dstPath = '/var/www/foodapp/images/food/' . $image_name;
+
+                    // finally upload food image
+                    $upload = move_uploaded_file($srcPath, $dstPath);
+
+                    // check whether image uploaded or not
+                    if ($upload == false) {
+                        // set message
+                        $_SESSION['upload-food'] = "<div class='error-message'>Failed to upload the Image.</div>";
+                        // redirect to add category page
+                        header('Location:' . SITEURL . 'admin/add-food.php');
+                        // stop the process
+                        die();
+                    }
+                }
+            } else {
+
+                // setting default value as blank
+                $image_name = "";
+            }
+
+
+            // 3. Insert  into the database
+            // create a sql query to save or add food
+            $queryInsert = "INSERT INTO foods SET
+                title = '$title',
+                description = '$description',
+                price = $price,
+                image_name = '$image_name',
+                category_id = $category,
+                featured = '$featured',
+                active = '$active'  
+            ";
+
+            // execute the query
+            $resultInsert = mysqli_query($connection, $queryInsert);
+
+            // check whether data is inserted or not
+            // 4. Redirect with message to manage food page
+            if ($resultInsert == true) {
+                // Data inserted successfully
+                $_SESSION['add-food'] = "<div class='success-message'>Food Added Successfully</div>";
+                header('Location:' . SITEURL . 'admin/manage-food.php');
+            } else {
+                // Failed to insert data
+                $_SESSION['add-food'] = "<div class='error-message'>Failed to Add Food</div>";
+                header('Location:' . SITEURL . 'admin/manage-food.php');
+            }
+        }
+
+        ?>
     </div>
 </div>
 <!-- Main Section Ends -->
