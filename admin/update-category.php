@@ -75,12 +75,12 @@
                                 if ($featured == "Yes") {
                                     echo "checked";
                                 }
-                                ?> type="radio" name="active" value="Yes">Yes
+                                ?> type="radio" name="featured" value="Yes">Yes
                         <input <?php
                                 if ($featured == "No") {
                                     echo "checked";
                                 }
-                                ?> type="radio" name="active" value="No">No
+                                ?> type="radio" name="featured" value="No">No
                     </td>
                 </tr>
                 <tr>
@@ -90,12 +90,12 @@
                                 if ($active == "Yes") {
                                     echo "checked";
                                 }
-                                ?> type="radio" name="featured" value="Yes">Yes
+                                ?> type="radio" name="active" value="Yes">Yes
                         <input <?php
                                 if ($active == "No") {
                                     echo "checked";
                                 }
-                                ?> type="radio" name="featured" value="No">No
+                                ?> type="radio" name="active" value="No">No
                     </td>
                 </tr>
                 <tr>

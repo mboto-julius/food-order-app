@@ -32,9 +32,41 @@
                     <td>Category: </td>
                     <td>
                         <select name="category" class="custom-select">
-                            <option value="1">Food</option>
-                            <option value="2">Drink</option>
-                            <option value="3">Snacks</option>
+
+                            <?php
+                            // diplay category from database
+                            //1. sql query to get all active category from database
+                            $query = "SELECT * FROM categories WHERE active='Yes'";
+
+                            // executing the query
+                            $result = mysqli_query($connection, $query);
+
+                            // count rows to check whether  we have categories or not
+                            $count = mysqli_num_rows($result);
+
+                            // if count is greater than zero, then we have category else we dont
+                            if ($count > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    // get the details of category
+                                    $id = $row['id'];
+                                    $title = $row['title'];
+
+                            ?>
+
+                                    <!-- // 2. display on dropdown -->
+                                    <option value="<?php echo $id; ?>"><?php echo $title; ?></option>
+
+                                <?php
+
+                                }
+                            } else {
+                                ?>
+                                <option value="0">No Category Found</option>
+                            <?php
+                            }
+
+                            ?>
+
                         </select>
                     </td>
                 </tr>
