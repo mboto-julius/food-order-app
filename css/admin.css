@@ -70,11 +70,22 @@
     width: 50%;
 }
 
-.table-add-admin tr td input{
+.table-add-admin tr td input,
+.table-add-admin tr td textarea{
     padding: 10px 30px 10px 8px;
     border-radius: 5px;
-    border: 1px solid blue;
+    border: 1px solid #f1f2f6;
     font-size: 16px;
+}
+
+.custom-select{
+    width: 50%;
+    border-radius: 5px;
+    padding: 10px 30px 10px 8px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #f1f2f6;
+    background-color: #fff;
 }
 
 table tr th{
