@@ -34,7 +34,20 @@ include('includes/menu.php');
             unset($_SESSION['no-category-found']);
         }
 
+        if (isset($_SESSION['update-category'])) {
+            echo $_SESSION['update-category'];
+            unset($_SESSION['update-category']);
+        }
 
+        if (isset($_SESSION['upload'])) {
+            echo $_SESSION['upload'];
+            unset($_SESSION['upload']);
+        }
+
+        if (isset($_SESSION['failed-remove'])) {
+            echo $_SESSION['failed-remove'];
+            unset($_SESSION['failed-remove']);
+        }
 
         ?>
         <!-- session message ends -->
