@@ -3,7 +3,7 @@
 <!-- Main Section Starts -->
 <div class="main">
     <div class="wrapper">
-        <h1>Update Category</h1>
+        <h1>Update Food</h1>
         <br><br>
 
         <!-- Add Food Form Starts -->
@@ -37,7 +37,35 @@
                     <td>Category: </td>
                     <td>
                         <select name="category" class="custom-select">
-                            <option value="0">Test Category</option>
+
+                            <?php
+
+                            // query to get active categories
+                            $sql = "SELECT * FROM categories WHERE active='Yes'";
+
+                            // execute the query
+                            $result = mysqli_query($connection, $sql);
+
+                            // count rows
+                            $count = mysqli_num_rows($result);
+
+                            // check whether category available or not
+                            if ($count > 0) {
+
+                                // category available
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    $category_title = $row['title'];
+                                    $category_id = $row['id'];
+
+                                    echo "<option value='$category_id'>$category_title</option>";
+                                }
+                            } else {
+
+                                // category not available
+                                echo "<option value='0' class='error-message'>Category Not Available.</option>";
+                            }
+                            ?>
+
                         </select>
                     </td>
                 </tr>
