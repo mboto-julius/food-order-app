@@ -41,7 +41,7 @@ if (isset($_GET['id']) and isset($_GET['image_name'])) {
         header('Location:' . SITEURL . 'admin/manage-category.php');
     } else {
         // set fail message and redirects
-        $_SESSION['delete-category'] = "<div class='error-message'>Failed to Delete Categoryx</div>";
+        $_SESSION['delete-category'] = "<div class='error-message'>Failed to Delete Category</div>";
         // redirect to manage category page
         header('Location:' . SITEURL . 'admin/manage-category.php');
     }

@@ -18,6 +18,24 @@ include('includes/menu.php');
             echo $_SESSION['add-food'];
             unset($_SESSION['add-food']);
         }
+
+        if (isset($_SESSION['delete-food'])) {
+            echo $_SESSION['delete-food'];
+            unset($_SESSION['delete-food']);
+        }
+
+        if (isset($_SESSION['remove-food'])) {
+            echo $_SESSION['remove-food'];
+            unset($_SESSION['remove-food']);
+        }
+
+
+        if (isset($_SESSION['unauthorize'])) {
+            echo $_SESSION['unauthorize'];
+            unset($_SESSION['unauthorize']);
+        }
+
+
         ?>
 
         <br>
@@ -93,7 +111,7 @@ include('includes/menu.php');
                         <td><?php echo $active; ?></td>
                         <td>
                             <a href="" class="btn-secondary">Update</a>
-                            <a href="" class="btn-danger">Delete</a>
+                            <a href="<?php echo SITEURL; ?>admin/delete-food.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>" class="btn-danger">Delete</a>
                         </td>
                     </tr>
 
