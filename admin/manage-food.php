@@ -110,7 +110,7 @@ include('includes/menu.php');
                         <td><?php echo $featured; ?></td>
                         <td><?php echo $active; ?></td>
                         <td>
-                            <a href="" class="btn-secondary">Update</a>
+                            <a href="<?php echo SITEURL; ?>admin/update-food.php?id=<?php echo $id; ?>" class="btn-secondary">Update</a>
                             <a href="<?php echo SITEURL; ?>admin/delete-food.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>" class="btn-danger">Delete</a>
                         </td>
                     </tr>
@@ -120,7 +120,7 @@ include('includes/menu.php');
             } else {
 
                 // food not added in database
-                echo "<tr><td colspan='7' class='error-message'>Food Added Yet.</td></tr>";
+                echo "<tr><td colspan='7' class='error-message'>Food Not Added Yet.</td></tr>";
             }
 
             ?>
