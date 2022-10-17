@@ -131,10 +131,10 @@ if (isset($_GET['id'])) {
                     <td>
                         <input <?php if ($featured == "Yes") {
                                     echo "checked";
-                                } ?> type="radio" name="featured">Yes
+                                } ?> type="radio" name="featured" value="Yes">Yes
                         <input <?php if ($featured == "No") {
                                     echo "checked";
-                                } ?> type="radio" name="featured">No
+                                } ?> type="radio" name="featured" value="No">No
                     </td>
                 </tr>
                 <tr>
@@ -142,10 +142,10 @@ if (isset($_GET['id'])) {
                     <td>
                         <input <?php if ($active == "Yes") {
                                     echo "checked";
-                                } ?> type="radio" name="active">Yes
+                                } ?> type="radio" name="active" value="Yes">Yes
                         <input <?php if ($active == "No") {
                                     echo "checked";
-                                } ?> type="radio" name="active">No
+                                } ?> type="radio" name="active" value="No">No
                     </td>
                 </tr>
                 <tr>
