@@ -35,6 +35,15 @@ include('includes/menu.php');
             unset($_SESSION['unauthorize']);
         }
 
+        if (isset($_SESSION['upload-image'])) {
+            echo $_SESSION['upload-image'];
+            unset($_SESSION['upload-image']);
+        }
+
+        if (isset($_SESSION['update'])) {
+            echo $_SESSION['update'];
+            unset($_SESSION['update']);
+        }
 
         ?>
 
