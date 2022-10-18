@@ -16,29 +16,59 @@
   <div class="container">
     <h2 class="text-center">Explore Foods</h2>
 
-    <a href="category-foods.html">
-      <div class="box-3 float-container">
-        <img src="images/pizza.jpg" alt="Pizza" class="img-responsive img-curve" />
+    <?php
+    // create sql query to display categories from database
+    $sql = "SELECT * FROM categories WHERE active='Yes' AND featured='Yes' LIMIT 3";
 
-        <h3 class="float-text text-white">Pizza</h3>
-      </div>
-    </a>
+    // execute the query
+    $result = mysqli_query($connection, $sql);
 
-    <a href="#">
-      <div class="box-3 float-container">
-        <img src="images/burger.jpg" alt="Burger" class="img-responsive img-curve" />
+    // count row to check whether the category is available or not
+    $count = mysqli_num_rows($result);
 
-        <h3 class="float-text text-white">Burger</h3>
-      </div>
-    </a>
+    if ($count > 0) {
 
-    <a href="#">
-      <div class="box-3 float-container">
-        <img src="images/momo.jpg" alt="Momo" class="img-responsive img-curve" />
+      // categories available
+      while ($row = mysqli_fetch_assoc($result)) {
 
-        <h3 class="float-text text-white">Momo</h3>
-      </div>
-    </a>
+        // get the values from databases
+        $id = $row['id'];
+        $title = $row['title'];
+        $image_name = $row['image_name'];
+
+    ?>
+
+        <a href="category-foods.html">
+          <div class="box-3 float-container">
+
+            <?php
+            // check whether the image is available or not
+            if ($image_name == "") {
+              // display image
+              echo "<div class='error-message'>Image not available</div>";
+            } else {
+
+              // image available
+            ?>
+              <img src="<?php echo SITEURL; ?>images/category/<?php echo $image_name; ?>" class="img-responsive img-curve" />
+            <?php
+            }
+
+            ?>
+            <h3 class="float-text text-white"><?php echo $title; ?></h3>
+          </div>
+        </a>
+
+    <?php
+
+      }
+    } else {
+      // categories not available
+      echo "<div class='error-message'>Category not added.</div>";
+    }
+
+
+    ?>
 
     <div class="clearfix"></div>
   </div>

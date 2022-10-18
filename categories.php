@@ -5,100 +5,53 @@
   <div class="container">
     <h2 class="text-center">Explore Foods</h2>
 
-    <a href="category-foods.html">
-      <div class="box-3 float-container">
-        <img src="images/pizza.jpg" alt="Pizza" class="img-responsive img-curve" />
+    <?php
 
-        <h3 class="float-text text-white">Pizza</h3>
-      </div>
-    </a>
+    // display all categories that are active
+    $sql = "SELECT * FROM categories WHERE active='Yes'";
 
-    <a href="#">
-      <div class="box-3 float-container">
-        <img src="images/burger.jpg" alt="Burger" class="img-responsive img-curve" />
+    // Execute the query
+    $result = mysqli_query($connection, $sql);
 
-        <h3 class="float-text text-white">Burger</h3>
-      </div>
-    </a>
+    // count rows
+    $count = mysqli_num_rows($result);
 
-    <a href="#">
-      <div class="box-3 float-container">
-        <img src="images/momo.jpg" alt="Momo" class="img-responsive img-curve" />
+    // check whether categories available or not
+    if ($count > 0) {
+      // categories available
+      while ($row = mysqli_fetch_assoc($result)) {
+        $id = $row['id'];
+        $title = $row['title'];
+        $image_name = $row['image_name'];
+    ?>
+        <a href="category-foods.html">
+          <div class="box-3 float-container">
 
-        <h3 class="float-text text-white">Momo</h3>
-      </div>
-    </a>
+            <?php
+            if ($image_name == "") {
+              // image not available
+              echo "<div class='error-message'>Image not found</div>";
+            } else {
+              // image available
+            ?>
+              <img src="<?php echo SITEURL; ?>images/category/<?php echo $image_name; ?>" class="img-responsive img-curve" />
 
-    <a href="#">
-      <div class="box-3 float-container">
-        <img src="images/pizza.jpg" alt="Pizza" class="img-responsive img-curve" />
+            <?php
+            }
 
-        <h3 class="float-text text-white">Pizza</h3>
-      </div>
-    </a>
+            ?>
 
-    <a href="#">
-      <div class="box-3 float-container">
-        <img src="images/burger.jpg" alt="Burger" class="img-responsive img-curve" />
+            <h3 class="float-text text-white"><?php echo $title; ?></h3>
+          </div>
+        </a>
+    <?php
+      }
+    } else {
+      // categories not available
+      echo "<div class='error-message'>Categories not found</div>";
+    }
 
-        <h3 class="float-text text-white">Burger</h3>
-      </div>
-    </a>
-
-    <a href="#">
-      <div class="box-3 float-container">
-        <img src="images/momo.jpg" alt="Momo" class="img-responsive img-curve" />
-
-        <h3 class="float-text text-white">Momo</h3>
-      </div>
-    </a>
-    <a href="#">
-      <div class="box-3 float-container">
-        <img src="images/pizza.jpg" alt="Pizza" class="img-responsive img-curve" />
-
-        <h3 class="float-text text-white">Pizza</h3>
-      </div>
-    </a>
-
-    <a href="#">
-      <div class="box-3 float-container">
-        <img src="images/burger.jpg" alt="Burger" class="img-responsive img-curve" />
-
-        <h3 class="float-text text-white">Burger</h3>
-      </div>
-    </a>
-
-    <a href="#">
-      <div class="box-3 float-container">
-        <img src="images/momo.jpg" alt="Momo" class="img-responsive img-curve" />
-
-        <h3 class="float-text text-white">Momo</h3>
-      </div>
-    </a>
-
-    <a href="#">
-      <div class="box-3 float-container">
-        <img src="images/pizza.jpg" alt="Pizza" class="img-responsive img-curve" />
-
-        <h3 class="float-text text-white">Pizza</h3>
-      </div>
-    </a>
-
-    <a href="#">
-      <div class="box-3 float-container">
-        <img src="images/burger.jpg" alt="Burger" class="img-responsive img-curve" />
-
-        <h3 class="float-text text-white">Burger</h3>
-      </div>
-    </a>
-
-    <a href="#">
-      <div class="box-3 float-container">
-        <img src="images/momo.jpg" alt="Momo" class="img-responsive img-curve" />
-
-        <h3 class="float-text text-white">Momo</h3>
-      </div>
-    </a>
+    ?>
 
     <div class="clearfix"></div>
   </div>
