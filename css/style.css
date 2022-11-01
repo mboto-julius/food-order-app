@@ -86,6 +86,14 @@ fieldset{
     border-radius: 5px;
 }
 
+.success-message{
+    color: #2f9e44;
+}
+
+.error-message{
+    color: #e03131;
+}
+
 
 /* CSSS for navbar section */
 
