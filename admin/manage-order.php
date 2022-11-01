@@ -27,8 +27,8 @@ include('includes/menu.php');
 
             <?php
 
-            // get all the order from databases
-            $sql = "SELECT * FROM orders";
+            // get all the order from databases (ORDER BY to get the latest order)
+            $sql = "SELECT * FROM orders ORDER BY id DESC";
             // execute query
             $result = mysqli_query($connection, $sql);
             // count the rows
