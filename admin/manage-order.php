@@ -9,6 +9,16 @@ include('includes/menu.php');
     <div class="wrapper">
         <h1>Manage Order</h1>
         <br><br>
+
+        <?php
+
+        if (isset($_SESSION['order'])) {
+            echo $_SESSION['order'];
+            unset($_SESSION['order']);
+        }
+
+        ?>
+
         <!-- table Starts-->
         <table class="table-width">
             <tr>
@@ -61,13 +71,27 @@ include('includes/menu.php');
                         <td><?php echo $qty; ?></td>
                         <td><?php echo $total; ?></td>
                         <td><?php echo $order_date; ?></td>
-                        <td><?php echo $status; ?></td>
+                        <td>
+                            <?php
+
+                            if ($status == "Ordered") {
+                                echo "<label>$status</label>";
+                            } elseif ($status == "On Delivery") {
+                                echo "<label style='color:orange;'>$status</label>";
+                            } elseif ($status == "Delivery") {
+                                echo "<label style='color:green;'>$status</label>";
+                            } elseif ($status == "Cancelled") {
+                                echo "<label style='color:red;'>$status</label>";
+                            }
+
+                            ?>
+                        </td>
                         <td><?php echo $customer_name; ?></td>
                         <td><?php echo $customer_contact; ?></td>
                         <td><?php echo $customer_email; ?></td>
                         <td><?php echo $customer_address; ?></td>
                         <td>
-                            <a href="" class="btn-secondary">Update</a>
+                            <a href="<?php echo SITEURL; ?>admin/update-order.php?id=<?php echo $id ?>" class="btn-secondary">Update</a>
                         </td>
                     </tr>
             <?php
